@@ -64,6 +64,27 @@
                 <artifactId>lombok-mapstruct-binding</artifactId>
                 <version>${lombok-mapstruct-binding.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.luim</groupId>
+                <artifactId>luim-boot-starter-base</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.luim</groupId>
+                <artifactId>luim-boot-starter-mybatis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.luim</groupId>
+                <artifactId>luim-boot-starter-redisson</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.luim</groupId>
+                <artifactId>luim-boot-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
