@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
+ * 账号相关业务
+ *
  * @author yang.lu
  */
 @Service

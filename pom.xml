@@ -23,8 +23,10 @@
     </properties>
 
     <modules>
-        <module>dependencies</module>
-        <module>luim-framework</module>
+        <module>luim-bom</module>
+        <module>luim-boot</module>
+        <module>luim-cloud-gateway</module>
+        <module>luim-platform-uaa</module>
         <module>luim-platform-uac</module>
     </modules>
 
@@ -32,7 +34,7 @@
         <dependencies>
             <dependency>
                 <groupId>cn.luim</groupId>
-                <artifactId>dependencies</artifactId>
+                <artifactId>luim-bom</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>

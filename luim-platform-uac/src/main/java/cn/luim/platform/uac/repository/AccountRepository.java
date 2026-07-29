@@ -1,12 +1,14 @@
 package cn.luim.platform.uac.repository;
 
-import cn.luim.platform.uac.model.entity.AccountDO;
 import cn.luim.platform.uac.mapper.AccountMapper;
+import cn.luim.platform.uac.model.entity.AccountDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 /**
+ * 账户数据仓储
+ *
  * @author yang.lu
  */
 @Repository
@@ -15,10 +17,4 @@ public class AccountRepository extends ServiceImpl<AccountMapper, AccountDO> {
 
 	private final AccountMapper accountMapper;
 
-	public boolean existsAccount(AccountType accountType, String account) {
-		return lambdaQuery()
-			.eq(AccountDO::getAccount, account)
-			.eq(AccountDO::getAccountType, accountType.getCode())
-			.exists();
-	}
 }

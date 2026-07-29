@@ -1,0 +1,2 @@
+userContextConsumerFilter=cn.luim.boot.starter.security.filter.UserContextConsumerFilter
+userContextProviderFilter=cn.luim.boot.starter.security.filter.UserContextProviderFilter

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: luim-cloud-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST}
+        username: ${NACOS_USERNAME}
+        password: ${NACOS_USERNAME}
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true
+logging:
+  level:
+    cn.luim.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
+    com.alibaba.nacos: INFO

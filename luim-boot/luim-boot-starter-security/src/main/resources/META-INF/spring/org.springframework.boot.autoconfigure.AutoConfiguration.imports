@@ -1,0 +1,2 @@
+cn.luim.boot.starter.security.config.CustomSecurityAutoConfiguration
+cn.luim.boot.starter.security.config.CustomWebSecurityAutoConfiguration
