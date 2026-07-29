@@ -6,6 +6,8 @@ import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomize
 import org.springframework.context.annotation.Bean;
 
 /**
+ * Jackson 自动配置
+ *
  * @author yang.lu
  */
 @AutoConfiguration

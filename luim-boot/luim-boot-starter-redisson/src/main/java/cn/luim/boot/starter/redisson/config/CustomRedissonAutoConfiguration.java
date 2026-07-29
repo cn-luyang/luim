@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
+ * Redisson 自动配置
+ *
  * @author yang.lu
  */
 @AutoConfiguration

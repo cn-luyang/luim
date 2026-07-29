@@ -7,6 +7,8 @@ import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
 /**
+ * 构建 JsonMapper 序列化规则
+ *
  * @author yang.lu
  */
 @UtilityClass

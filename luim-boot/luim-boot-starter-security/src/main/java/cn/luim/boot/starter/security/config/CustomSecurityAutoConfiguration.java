@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Spring Security 配置
+ * Spring Security 自动配置
  */
 @AutoConfiguration
 public class CustomSecurityAutoConfiguration {
@@ -45,12 +45,12 @@ public class CustomSecurityAutoConfiguration {
 	}
 
 	@Bean
-	public CustomAccessDeniedHandler customAccessDeniedHandler(){
+	public CustomAccessDeniedHandler customAccessDeniedHandler() {
 		return new CustomAccessDeniedHandler();
 	}
 
 	@Bean
-	public CustomAuthenticationEntryPoint customAuthenticationEntryPoint(){
+	public CustomAuthenticationEntryPoint customAuthenticationEntryPoint() {
 		return new CustomAuthenticationEntryPoint();
 	}
 

@@ -5,6 +5,11 @@ import org.redisson.api.RedissonClient;
 
 import java.time.Duration;
 
+/**
+ * Redisson 助手类
+ *
+ * @author yang.lu
+ */
 public record RedissonHelper(RedissonClient redissonClient) {
 
 	public <T> void setString(String key, T value) {
