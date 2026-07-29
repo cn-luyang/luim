@@ -65,7 +65,7 @@ public class CustomSecurityAutoConfiguration {
 	 * @return TTL 安全上下文持有策略实例
 	 */
 	@Bean
-	public SecurityContextHolderStrategy securityContextHolderStrategy() {
+	public static SecurityContextHolderStrategy securityContextHolderStrategy() {
 		CustomSecurityContextHolderStrategy strategy = new CustomSecurityContextHolderStrategy();
 		SecurityContextHolder.setContextHolderStrategy(strategy);
 		return strategy;
