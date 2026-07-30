@@ -1,6 +1,8 @@
 package cn.luim.boot.starter.security.authorize;
 
 import cn.luim.boot.starter.security.annotation.Anonymous;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -17,9 +19,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 默认实现匹配规则，初始化一些匿名接口
+ *
  * @author yang.lu
  */
 public class DefaultAuthorizeRequestsCustomizer implements AuthorizeRequestsCustomizer {
+
+	private final static Logger logger = LoggerFactory.getLogger(DefaultAuthorizeRequestsCustomizer.class);
 
 	private final ApplicationContext applicationContext;
 
@@ -78,11 +84,15 @@ public class DefaultAuthorizeRequestsCustomizer implements AuthorizeRequestsCust
 						RequestMethodsRequestCondition methodsCond = requestMappingInfo.getMethodsCondition();
 						// 根据是否指定HTTP方法，分别配置放行策略
 						if (methodsCond.getMethods().isEmpty()) {
+							logger.debug("[Security 白名单放行] 所有方法: {}", (Object) patternArray);
 							registry.requestMatchers(patternArray).permitAll();
 						} else {
 							// 指定了方法：仅放行指定的HTTP方法
-							methodsCond.getMethods().forEach(method ->
-								registry.requestMatchers(HttpMethod.valueOf(method.name()), patternArray).permitAll()
+							methodsCond.getMethods().forEach(method -> {
+									logger.debug("[Security 白名单放行] [{}] 方法: {}", method.name(), patternArray);
+									registry.requestMatchers(HttpMethod.valueOf(method.name()), patternArray).permitAll();
+								}
+
 							);
 						}
 					}

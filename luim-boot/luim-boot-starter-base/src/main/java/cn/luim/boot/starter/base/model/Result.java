@@ -54,4 +54,12 @@ public class Result<T> implements Serializable {
 	public static <T> Result<T> failure(IBaseEnum<String> baseEnum) {
 		return new Result<>(baseEnum.getCode(), baseEnum.getMessage(), null);
 	}
+
+	public static <T> Result<T> failure(IBaseEnum<String> baseEnum, String message) {
+		return new Result<>(baseEnum.getCode(), message, null);
+	}
+
+	public boolean noSuccess(){
+		return !this.success;
+	}
 }

@@ -26,6 +26,7 @@
         <module>luim-bom</module>
         <module>luim-boot</module>
         <module>luim-cloud-gateway</module>
+        <module>luim-platform-api-uac</module>
         <module>luim-platform-uaa</module>
         <module>luim-platform-uac</module>
     </modules>

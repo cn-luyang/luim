@@ -1,3 +1,39 @@
+server:
+  port: 8882
 spring:
   application:
     name: luim-platform-uac
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST}
+        username: ${NACOS_USERNAME}
+        password: ${NACOS_USERNAME}
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}/platform_uac?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&&serverTimezone=Asia/Shanghai&useSSL=false
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 600000
+      auto-commit: true
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+dubbo:
+  registry:
+    address: nacos://${NACOS_HOST}
+    username: ${NACOS_USERNAME}
+    password: ${NACOS_PASSWORD}
+    register-mode: instance
+  protocol:
+    name: tri
+    port: -1
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+  consumer:
+    check: false

@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AutoConfiguration
 public class CustomSecurityAutoConfiguration {
 
-	@DubboReference(version = "1.0.0")
+	@DubboReference
 	private AuthRpcService authRpcService;
 
 	/**

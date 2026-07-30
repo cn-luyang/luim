@@ -1,5 +1,6 @@
 package cn.luim.platform.uac.model.entity;
 
+import cn.luim.platform.api.uac.enums.AccountType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
@@ -17,4 +18,5 @@ public class AccountDO {
 	private Long id;
 	private String userId;
 	private String account;
+	private AccountType accountType;
 }

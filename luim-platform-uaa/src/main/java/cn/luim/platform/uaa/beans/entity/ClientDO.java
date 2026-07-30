@@ -1,4 +1,4 @@
-package cn.luim.platform.uaa.model.entity;
+package cn.luim.platform.uaa.beans.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

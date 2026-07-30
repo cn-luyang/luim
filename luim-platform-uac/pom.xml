@@ -15,11 +15,19 @@
     <dependencies>
         <dependency>
             <groupId>cn.luim</groupId>
+            <artifactId>luim-platform-api-uac</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.luim</groupId>
             <artifactId>luim-boot-starter-mybatis</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.luim</groupId>
             <artifactId>luim-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.luim</groupId>
+            <artifactId>luim-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

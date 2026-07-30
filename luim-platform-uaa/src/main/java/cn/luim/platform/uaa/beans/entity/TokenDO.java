@@ -1,5 +1,6 @@
-package cn.luim.platform.uaa.model.entity;
+package cn.luim.platform.uaa.beans.entity;
 
+import cn.luim.boot.starter.mybatis.model.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Getter
 @Setter
 @TableName(value = "t_token", autoResultMap = true)
-public class TokenDO {
+public class TokenDO extends BaseEntity {
 
 	@TableId
 	private Long id;

@@ -1,8 +1,8 @@
-package cn.luim.platform.uaa.model.convert;
+package cn.luim.platform.uaa.beans.convert;
 
-import cn.luim.platform.uaa.model.command.ClientCreateCommand;
-import cn.luim.platform.uaa.model.dto.ClientDetailDTO;
-import cn.luim.platform.uaa.model.entity.ClientDO;
+import cn.luim.platform.uaa.beans.command.ClientCreateCommand;
+import cn.luim.platform.uaa.beans.dto.ClientDetailDTO;
+import cn.luim.platform.uaa.beans.entity.ClientDO;
 import org.mapstruct.Mapper;
 
 /**

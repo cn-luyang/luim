@@ -108,6 +108,12 @@
 
             <dependency>
                 <groupId>cn.luim</groupId>
+                <artifactId>luim-platform-api-uac</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.luim</groupId>
                 <artifactId>luim-boot-starter-base</artifactId>
                 <version>${revision}</version>
             </dependency>

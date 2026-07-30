@@ -1,4 +1,4 @@
-package cn.luim.platform.uaa.model.dto;
+package cn.luim.platform.uaa.beans.dto;
 
 import java.util.List;
 
