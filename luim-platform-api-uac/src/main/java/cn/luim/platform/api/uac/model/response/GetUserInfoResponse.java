@@ -15,5 +15,5 @@ public class GetUserInfoResponse implements Serializable {
 	private static final long serialVersionUID = 4808504904401015433L;
 
 	private String userId;
-	private String cnName;
+	private String chineseName;
 }

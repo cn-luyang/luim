@@ -1,4 +1,4 @@
-package cn.luim.platform.uaa.beans.command;
+package cn.luim.platform.uaa.model.command;
 
 import lombok.Getter;
 import lombok.Setter;

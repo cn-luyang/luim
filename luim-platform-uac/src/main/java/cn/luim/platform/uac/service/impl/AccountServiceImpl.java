@@ -48,6 +48,6 @@ public class AccountServiceImpl implements AccountService {
 			return null;
 		}
 
-		return accountConvert.buildAccountDetailDTO(accountDO);
+		return accountConvert.toAccountDetailDTO(accountDO);
 	}
 }

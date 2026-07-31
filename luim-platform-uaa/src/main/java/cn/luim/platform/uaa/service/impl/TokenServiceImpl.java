@@ -1,10 +1,10 @@
 package cn.luim.platform.uaa.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
-import cn.luim.platform.uaa.beans.command.CreateUserTokenCommand;
-import cn.luim.platform.uaa.beans.convert.TokenConvert;
-import cn.luim.platform.uaa.beans.dto.CreateUserTokenDTO;
-import cn.luim.platform.uaa.beans.entity.TokenDO;
+import cn.luim.platform.uaa.model.command.CreateUserTokenCommand;
+import cn.luim.platform.uaa.model.convert.TokenConvert;
+import cn.luim.platform.uaa.model.dto.CreateUserTokenDTO;
+import cn.luim.platform.uaa.model.entity.TokenDO;
 import cn.luim.platform.uaa.repository.TokenRepository;
 import cn.luim.platform.uaa.service.ClientService;
 import cn.luim.platform.uaa.service.TokenService;
@@ -37,9 +37,9 @@ public class TokenServiceImpl implements TokenService {
 			tokenRepository.removeById(tokenId);
 		}
 
-		TokenDO tokenDO = tokenConvert.buildEntity(command);
+		TokenDO tokenDO = tokenConvert.toEntity(command);
 		tokenRepository.save(tokenDO);
 
-		return tokenConvert.buildCreateUserTokenDTO(tokenDO);
+		return tokenConvert.toCreateUserTokenDTO(tokenDO);
 	}
 }

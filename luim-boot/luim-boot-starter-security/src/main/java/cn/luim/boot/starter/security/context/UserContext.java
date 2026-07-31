@@ -18,7 +18,7 @@ public class UserContext implements Serializable {
 	private static final long serialVersionUID = 6743032079745351401L;
 
 	private String userId;
-	private String cnName;
+	private String chineseName;
 	private Set<String> roles;             // 角色集合: ["ADMIN", "USER"]
 	private Set<String> permissions;       // 权限集合: ["order:read", "order:write"]
 	private long permissionVersion;        // 权限版本号（用于变更检测）

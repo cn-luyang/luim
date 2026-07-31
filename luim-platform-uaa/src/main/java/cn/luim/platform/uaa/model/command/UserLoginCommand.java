@@ -1,4 +1,4 @@
-package cn.luim.platform.uaa.beans.command;
+package cn.luim.platform.uaa.model.command;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class LoginCommand {
+public class UserLoginCommand {
 
 	private String account;
 	private Integer accountType;

@@ -1,0 +1,10 @@
+### 登录
+POST http://127.0.0.1:8881//auth/login
+Content-Type: application/json
+
+{
+    "account": "luhah@gmail.com",
+    "accountType": 2,
+    "credential": "123",
+    "clientId": "cli_1pPDnw_G3N9OfnpY"
+}

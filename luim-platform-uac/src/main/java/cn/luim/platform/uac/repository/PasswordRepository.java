@@ -23,10 +23,12 @@ public class PasswordRepository extends ServiceImpl<PasswordMapper, PasswordDO> 
 	public PasswordDO findByAccountId(String accountId) {
 		if (StringUtil.isBlank(accountId)) {
 			logger.warn("[仓储查询-密码] 缺失查询条件 | accountId={}", accountId);
+			return null;
 		}
 
 		return this.lambdaQuery()
 			.eq(PasswordDO::getAccountId, accountId)
-			.one();
+			.oneOpt()
+			.orElse(null);
 	}
 }

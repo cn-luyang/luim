@@ -2,12 +2,12 @@ package cn.luim.platform.uaa.service.impl;
 
 import cn.luim.boot.starter.base.utils.StringUtil;
 import cn.luim.boot.starter.base.utils.id.IdUtil;
-import cn.luim.platform.uaa.beans.command.ClientCreateCommand;
-import cn.luim.platform.uaa.beans.convert.ClientConvert;
-import cn.luim.platform.uaa.beans.dto.ClientCreateDTO;
-import cn.luim.platform.uaa.beans.dto.ClientDetailDTO;
-import cn.luim.platform.uaa.beans.entity.ClientDO;
 import cn.luim.platform.uaa.common.enums.ErrorCode;
+import cn.luim.platform.uaa.model.command.ClientCreateCommand;
+import cn.luim.platform.uaa.model.convert.ClientConvert;
+import cn.luim.platform.uaa.model.dto.ClientCreateDTO;
+import cn.luim.platform.uaa.model.dto.ClientDetailDTO;
+import cn.luim.platform.uaa.model.entity.ClientDO;
 import cn.luim.platform.uaa.repository.ClientRepository;
 import cn.luim.platform.uaa.service.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -33,18 +33,18 @@ public class ClientServiceImpl implements ClientService {
 	public ClientCreateDTO create(ClientCreateCommand command) {
 
 		// 校验客户端名称是否唯一
-		boolean isNameUnique = clientRepository.clientNameUnique(command.getClientName());
-		ErrorCode.CLIENT_EXISTS.isFalse(isNameUnique);
+		boolean nameTaken = clientRepository.isClientNameTaken(command.getClientName());
+		ErrorCode.CLIENT_EXISTS.isTrue(nameTaken);
 
 		// 生成客户端密钥
 		String rawSecret = IdUtil.simpleUUID();
 		String encodedSecret = passwordEncoder.encode(rawSecret);
 
 		// 构建并保存实体
-		ClientDO clientDO = clientConvert.buildEntity(command, encodedSecret);
+		ClientDO clientDO = clientConvert.toEntity(command, encodedSecret);
 		clientRepository.save(clientDO);
 
-		return ClientCreateDTO.build(clientDO.getClientId(), rawSecret);
+		return ClientCreateDTO.of(clientDO.getClientId(), rawSecret);
 	}
 
 	@Override
@@ -54,6 +54,6 @@ public class ClientServiceImpl implements ClientService {
 		}
 
 		ClientDO clientDO = clientRepository.findByClientId(clientId);
-		return clientConvert.buildClientDetailDTO(clientDO);
+		return clientConvert.toClientDetailDTO(clientDO);
 	}
 }

@@ -31,23 +31,25 @@ public class AccountRpcServiceImpl implements AccountRpcService {
 	public Result<String> validateAccount(AccountAuthRequest request) {
 
 		if (ObjectUtil.isNull(request)) {
-			logger.warn("[RPC账号验证] 请求参数为空");
+			logger.warn("[RPC-账号验证] 请求参数为空");
 			return Result.failure(ResultEnum.PARAM_MISSING, "认证请求参数为空");
 		}
 
 		// 获取账号信息
 		AccountDetailDTO accountDetailDTO = accountService.getDetail(request.getAccount(), request.getAccountType());
 		if (ObjectUtil.isNull(accountDetailDTO)) {
-			logger.warn("[RPC账号验证] 账号不存在 | account={}, accountType={}", request.getAccount(), request.getAccountType());
+			logger.warn("[RPC-账号验证] 账号不存在 | account={}, accountType={}", request.getAccount(), request.getAccountType());
 			return Result.failure(ResultEnum.DATA_NOT_FOUND, "账号不存在");
 		}
 
 		// 验证账号密码
 		boolean correctPassword = passwordService.validatePassword(accountDetailDTO.getAccountId(), request.getCredential());
 		if (!correctPassword) {
-			logger.warn("[RPC账号验证] 密码验证未通过 | accountId={}", accountDetailDTO.getAccountId());
+			logger.warn("[RPC-账号验证] 密码验证失败 | accountId={}", accountDetailDTO.getAccountId());
 			return Result.failure(ResultEnum.DATA_NOT_MATCH, "密码验证未通过");
 		}
+
+		logger.info("[RPC-账号验证] 验证成功 | account={}, userId={}", request.getAccount(), accountDetailDTO.getUserId());
 
 		return Result.success(accountDetailDTO.getUserId());
 	}

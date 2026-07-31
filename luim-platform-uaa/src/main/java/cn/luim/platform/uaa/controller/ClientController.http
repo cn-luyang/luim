@@ -1,0 +1,11 @@
+### 创建客户端
+POST http://127.0.0.1:8881//client
+Content-Type: application/json
+
+{
+  "clientName": "测试",
+  "redirectUris": ["https://www.baidu.com/"],
+  "accessTokenValidity": 7200,
+  "refreshTokenValidity": 604800,
+  "description": "描述"
+}

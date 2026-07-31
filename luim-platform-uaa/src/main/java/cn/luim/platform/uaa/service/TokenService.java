@@ -1,7 +1,7 @@
 package cn.luim.platform.uaa.service;
 
-import cn.luim.platform.uaa.beans.command.CreateUserTokenCommand;
-import cn.luim.platform.uaa.beans.dto.CreateUserTokenDTO;
+import cn.luim.platform.uaa.model.command.CreateUserTokenCommand;
+import cn.luim.platform.uaa.model.dto.CreateUserTokenDTO;
 
 /**
  * @author yang.lu

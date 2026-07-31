@@ -34,7 +34,7 @@ public class PasswordServiceImpl implements PasswordService {
 
 		PasswordDO passwordDO = passwordRepository.findByAccountId(accountId);
 		if (ObjectUtil.isNull(passwordDO)) {
-			logger.warn("[密码验证] 未获取到账户密码 | accountId={}", accountId);
+			logger.warn("[密码验证] 密码记录不存在 | accountId={}", accountId);
 			return false;
 		}
 

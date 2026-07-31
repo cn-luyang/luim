@@ -22,8 +22,6 @@ public class AccountRepository extends ServiceImpl<AccountMapper, AccountDO> {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountRepository.class);
 
-	private final AccountMapper accountMapper;
-
 	/**
 	 * 根据账号与账号类型查询账号实体
 	 *
@@ -32,6 +30,7 @@ public class AccountRepository extends ServiceImpl<AccountMapper, AccountDO> {
 	 * @return 账号实体，若参数不全或未查到则返回 null
 	 */
 	public AccountDO findByAccountAndType(String account, AccountType accountType) {
+
 		if (StringUtil.isBlank(account) || ObjectUtil.isNull(accountType)) {
 			logger.warn("[仓储查询-账号] 缺失查询条件 | account={}, accountType={}", account, accountType);
 			return null;

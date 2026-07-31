@@ -1,8 +1,9 @@
 package cn.luim.platform.uaa.repository;
 
+import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
-import cn.luim.platform.uaa.beans.entity.ClientDO;
 import cn.luim.platform.uaa.mapper.ClientMapper;
+import cn.luim.platform.uaa.model.entity.ClientDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ public class ClientRepository extends ServiceImpl<ClientMapper, ClientDO> {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClientRepository.class);
 
-	public boolean clientNameUnique(String clientName) {
+	public boolean isClientNameTaken(String clientName) {
 		if (StringUtil.isBlank(clientName)) {
 			return false;
 		}
@@ -29,12 +30,15 @@ public class ClientRepository extends ServiceImpl<ClientMapper, ClientDO> {
 	}
 
 	public ClientDO findByClientId(String clientId) {
-		return this.lambdaQuery().eq(ClientDO::getClientId, clientId).one();
+		return this.lambdaQuery()
+			.eq(ClientDO::getClientId, clientId)
+			.oneOpt()
+			.orElse(null);
 	}
 
 	@Override
 	public boolean save(ClientDO clientDO) {
-		if (null == clientDO) {
+		if (ObjectUtil.isNull(clientDO)) {
 			logger.warn("[ClientRepository#save] Client save attempted with null object");
 			return false;
 		}

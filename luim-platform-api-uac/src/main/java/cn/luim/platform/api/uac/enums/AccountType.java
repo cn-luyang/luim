@@ -1,6 +1,7 @@
 package cn.luim.platform.api.uac.enums;
 
 import cn.luim.boot.starter.base.enums.IBaseEnum;
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ public enum AccountType implements IBaseEnum<Integer> {
 	EMAIL(2, "邮箱号")
 	;
 
+	@EnumValue
 	private final Integer code;
 	private final String message;
 }

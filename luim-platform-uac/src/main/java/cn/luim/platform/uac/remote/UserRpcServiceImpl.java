@@ -29,17 +29,21 @@ public class UserRpcServiceImpl implements UserRpcService {
 	@Override
 	public Result<GetUserInfoResponse> getUserInfo(String userId) {
 
+		logger.info("[RPC-用户信息] 开始获取用户信息 | userId={}", userId);
+
 		if (StringUtil.isBlank(userId)) {
-			logger.warn("[RPC获取用户信息] 请求参数为空");
+			logger.warn("[RPC-用户信息] 请求参数为空");
 			return Result.failure(ResultEnum.PARAM_MISSING, "请求参数为空");
 		}
 
 		UserDetailDTO userDetailDTO = userService.getDetail(userId);
 		if (ObjectUtil.isNull(userDetailDTO)) {
-			logger.warn("[RPC获取用户信息] 用户不存在 | userId={}", userId);
+			logger.warn("[RPC-用户信息] 用户不存在 | userId={}", userId);
 			return Result.failure(ResultEnum.DATA_NOT_FOUND, "用户不存在");
 		}
 
-		return Result.success(userConvert.buildGetUserInfoResponse(userDetailDTO));
+		logger.info("[RPC-用户信息] 获取成功 | userId={}, username={}", userId, userDetailDTO.getChineseName());
+
+		return Result.success(userConvert.toGetUserInfoResponse(userDetailDTO));
 	}
 }

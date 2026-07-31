@@ -1,1 +1,2 @@
 cn.luim.boot.starter.web.config.CustomJacksonAutoConfiguration
+cn.luim.boot.starter.web.handler.GlobalExceptionHandler

@@ -1,7 +1,7 @@
 package cn.luim.platform.uaa.repository;
 
-import cn.luim.platform.uaa.beans.entity.TokenDO;
 import cn.luim.platform.uaa.mapper.TokenMapper;
+import cn.luim.platform.uaa.model.entity.TokenDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

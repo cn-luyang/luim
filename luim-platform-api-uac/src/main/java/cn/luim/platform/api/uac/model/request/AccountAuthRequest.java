@@ -1,7 +1,8 @@
 package cn.luim.platform.api.uac.model.request;
 
 import cn.luim.platform.api.uac.enums.AccountType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,7 +10,8 @@ import java.io.Serializable;
 /**
  * @author yang.lu
  */
-@Data
+@Getter
+@Setter
 public class AccountAuthRequest implements Serializable {
 
 	@Serial

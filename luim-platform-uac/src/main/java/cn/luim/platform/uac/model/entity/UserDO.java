@@ -16,5 +16,5 @@ public class UserDO {
 	@TableId
 	private Long id;
 	private String userId;
-	private String cnName;
+	private String chineseName;
 }

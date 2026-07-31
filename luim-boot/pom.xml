@@ -15,6 +15,7 @@
 
     <modules>
         <module>luim-boot-starter-base</module>
+        <module>luim-boot-starter-dubbo</module>
         <module>luim-boot-starter-mybatis</module>
         <module>luim-boot-starter-redisson</module>
         <module>luim-boot-starter-security</module>

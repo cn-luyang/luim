@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	public UserDetailDTO getDetail(String userId) {
 
 		if (StringUtil.isBlank(userId)) {
-			logger.warn("[获取用户详情] 缺失查询参数 | account={}", userId);
+			logger.warn("[获取用户详情] 缺失查询参数 | userId={}", userId);
 			return null;
 		}
 

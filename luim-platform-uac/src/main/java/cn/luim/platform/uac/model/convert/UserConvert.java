@@ -10,5 +10,5 @@ public interface UserConvert {
 
 	UserDetailDTO buildUserDetailDTO(UserDO userDO);
 
-	GetUserInfoResponse buildGetUserInfoResponse(UserDetailDTO userDetailDTO);
+	GetUserInfoResponse toGetUserInfoResponse(UserDetailDTO userDetailDTO);
 }
