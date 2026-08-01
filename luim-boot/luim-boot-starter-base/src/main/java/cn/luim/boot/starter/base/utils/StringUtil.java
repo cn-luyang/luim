@@ -98,11 +98,15 @@ public class StringUtil {
 	/**
 	 * 格式化文本
 	 *
-	 * @param str    包含占位符的字符序列
-	 * @param params 格式化参数
+	 * @param str  包含占位符的字符序列
+	 * @param args 格式化参数
 	 * @return 格式化后的字符串
 	 */
-	public static String format(CharSequence str, Object... params) {
-		return null;
+	public static String format(String str, Object... args) {
+		return String.format(str, args);
+	}
+
+	public static boolean equals(String str1, String str2) {
+		return Strings.CS.equals(str1, str2);
 	}
 }

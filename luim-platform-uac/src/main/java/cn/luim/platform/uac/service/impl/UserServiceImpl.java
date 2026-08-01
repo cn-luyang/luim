@@ -2,9 +2,9 @@ package cn.luim.platform.uac.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
+import cn.luim.platform.uac.mapper.entity.UserDO;
 import cn.luim.platform.uac.model.convert.UserConvert;
 import cn.luim.platform.uac.model.dto.UserDetailDTO;
-import cn.luim.platform.uac.model.entity.UserDO;
 import cn.luim.platform.uac.repository.UserRepository;
 import cn.luim.platform.uac.service.UserService;
 import lombok.RequiredArgsConstructor;

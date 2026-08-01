@@ -2,7 +2,7 @@ package cn.luim.platform.uac.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
-import cn.luim.platform.uac.model.entity.PasswordDO;
+import cn.luim.platform.uac.mapper.entity.PasswordDO;
 import cn.luim.platform.uac.repository.PasswordRepository;
 import cn.luim.platform.uac.service.PasswordService;
 import lombok.RequiredArgsConstructor;

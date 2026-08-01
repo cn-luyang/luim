@@ -22,6 +22,10 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.github.robsonkades</groupId>
             <artifactId>uuidv7</artifactId>
         </dependency>

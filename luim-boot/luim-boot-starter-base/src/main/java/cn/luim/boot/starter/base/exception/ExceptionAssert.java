@@ -2,6 +2,7 @@ package cn.luim.boot.starter.base.exception;
 
 import cn.luim.boot.starter.base.enums.IBaseEnum;
 import cn.luim.boot.starter.base.utils.ObjectUtil;
+import cn.luim.boot.starter.base.utils.StringUtil;
 
 /**
  * 业务异常断言接口，正向断言
@@ -18,6 +19,14 @@ public interface ExceptionAssert<T> extends IBaseEnum<T> {
 		return new BusinessException(this, cause);
 	}
 
+	private BusinessException newException(Object... args) {
+		return BusinessException.builder()
+			.code(StringUtil.toStringOrNull(getCode()))
+			.message(getMessage())
+			.args(args)
+			.build();
+	}
+
 	/**
 	 * 若为 true 则抛出异常
 	 *
@@ -27,6 +36,12 @@ public interface ExceptionAssert<T> extends IBaseEnum<T> {
 	default void isTrue(boolean condition) {
 		if (condition) {
 			throw newException();
+		}
+	}
+
+	default void isTrue(boolean condition, Object... args) {
+		if (condition) {
+			throw newException(args);
 		}
 	}
 

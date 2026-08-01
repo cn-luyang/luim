@@ -45,4 +45,16 @@ public class ObjectUtil {
 		}
 		return Objects.equals(object1, object2);
 	}
+
+	/**
+	 * 对象为 null 时返回默认值
+	 *
+	 * @param <T>          对象类型
+	 * @param object       待检查的对象
+	 * @param defaultValue 默认值
+	 * @return 如果对象为 null，则返回默认值，否则返回对象本身
+	 */
+	public static <T> T defaultIfNull(final T object, final T defaultValue) {
+		return isNull(object) ? defaultValue : object;
+	}
 }

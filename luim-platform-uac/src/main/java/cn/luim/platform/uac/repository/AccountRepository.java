@@ -4,7 +4,7 @@ import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
 import cn.luim.platform.api.uac.enums.AccountType;
 import cn.luim.platform.uac.mapper.AccountMapper;
-import cn.luim.platform.uac.model.entity.AccountDO;
+import cn.luim.platform.uac.mapper.entity.AccountDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

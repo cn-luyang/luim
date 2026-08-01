@@ -2,7 +2,7 @@ package cn.luim.platform.uac.repository;
 
 import cn.luim.boot.starter.base.utils.StringUtil;
 import cn.luim.platform.uac.mapper.PasswordMapper;
-import cn.luim.platform.uac.model.entity.PasswordDO;
+import cn.luim.platform.uac.mapper.entity.PasswordDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package cn.luim.platform.uac.mapper;
 
-import cn.luim.platform.uac.model.entity.UserDO;
+import cn.luim.platform.uac.mapper.entity.UserDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

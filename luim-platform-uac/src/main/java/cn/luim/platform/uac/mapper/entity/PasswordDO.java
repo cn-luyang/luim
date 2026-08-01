@@ -1,4 +1,4 @@
-package cn.luim.platform.uac.model.entity;
+package cn.luim.platform.uac.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
