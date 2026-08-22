@@ -1,12 +1,13 @@
-package cn.luim.boot.starter.base.enums;
+package cn.luim.boot.starter.mybatis.enums;
 
+import cn.luim.boot.starter.base.enums.IBaseEnum;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 公用状态枚举
+ * 状态枚举
  *
  * @author yang.lu
  */
