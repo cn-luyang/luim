@@ -9,6 +9,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ErrorCode implements ExceptionAssert<String> {
 
+	// 用户相关
+	USER_EMAIL_EXISTS("UAC:USER:001", "邮箱号已存在"),
+
 	// 部门相关
 	DEPT_ROOT_EXISTS("UAC:DEPT:001", "根节点已存在"),
 	DEPT_ROOT_NOT_MODIFY("UAC:DEPT:001", "根节禁止修改"),
@@ -19,13 +22,11 @@ public enum ErrorCode implements ExceptionAssert<String> {
 	DEPT_EXCEEDS_DEPTH("UAC:DEPT:003", "部门层级超限"),
 	DEPT_NOT_FOUND("UAC:DEPT:001", "部门不存在"),
 	DEPT_NAME_DUPLICATE("UAC:DEPT:004", "部门名称重复"),
+
 	// 登录认证相关
 	LOGIN_BAD_CREDENTIALS("UAA:AUTH:001", "账号或密码错误"),
 
-	// 客户端相关
-	CLIENT_EXISTS("UAA:CLIENT:001", "客户端已存在"),
-	CLIENT_NOT_FOUND("UAA:CLIENT:002", "客户端不存在或已被删除");
-
+	;
 	private final String code;
 	private final String message;
 }

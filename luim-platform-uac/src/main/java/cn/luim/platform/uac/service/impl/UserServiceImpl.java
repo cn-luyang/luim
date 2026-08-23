@@ -2,6 +2,9 @@ package cn.luim.platform.uac.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
+import cn.luim.platform.uac.common.enums.ErrorCode;
+import cn.luim.platform.uac.controller.request.CreateUserRequest;
+import cn.luim.platform.uac.controller.response.CreateUserResponse;
 import cn.luim.platform.uac.mapper.entity.UserDO;
 import cn.luim.platform.uac.model.convert.UserConvert;
 import cn.luim.platform.uac.model.dto.UserDetailDTO;
@@ -25,6 +28,18 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final UserConvert userConvert;
+
+	@Override
+	public CreateUserResponse create(CreateUserRequest createUserRequest) {
+
+		boolean emailDuplicate = userRepository.isEmailDuplicate(createUserRequest.getEmail());
+		ErrorCode.USER_EMAIL_EXISTS.isTrue(emailDuplicate);
+
+		UserDO userDO = userConvert.toUserDO(createUserRequest);
+		userRepository.save(userDO);
+
+		return CreateUserResponse.of(userDO.getUserId());
+	}
 
 	@Override
 	public UserDetailDTO getDetail(String userId) {

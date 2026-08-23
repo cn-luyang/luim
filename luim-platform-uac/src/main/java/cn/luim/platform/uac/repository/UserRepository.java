@@ -20,6 +20,12 @@ public class UserRepository extends ServiceImpl<UserMapper, UserDO> {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
+	public boolean isEmailDuplicate(String email) {
+		return this.lambdaQuery()
+			.eq(UserDO::getEmail, email)
+			.exists();
+	}
+
 	public UserDO findByUserId(String userId) {
 		if (StringUtil.isBlank(userId)) {
 			logger.warn("[用户仓储-查询用户信息] 缺失查询条件 | userId={}", userId);
