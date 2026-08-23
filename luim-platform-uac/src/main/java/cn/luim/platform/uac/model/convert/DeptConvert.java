@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 public interface DeptConvert {
 
 	@Mapping(target = "sortOrder", source = "sortOrder")
-	DeptDO toDeptDO(CreateDeptRequest createDeptRequest, int level, String path, Integer sortOrder);
+	DeptDO toDeptDO(CreateDeptRequest createDeptRequest, int deptLevel, String deptPath, Integer sortOrder);
 
 	DeptDO toDeptDO(UpdateDeptRequest updateDeptRequest, int level, String path, Integer sortOrder);
 }

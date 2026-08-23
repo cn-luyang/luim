@@ -1,9 +1,9 @@
 package cn.luim.platform.uac.service.impl;
 
-import cn.luim.boot.starter.base.enums.StatusEnum;
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
 import cn.luim.boot.starter.base.utils.constant.StringPool;
+import cn.luim.boot.starter.mybatis.enums.StatusEnum;
 import cn.luim.platform.uac.common.constant.DeptConstant;
 import cn.luim.platform.uac.common.enums.ErrorCode;
 import cn.luim.platform.uac.controller.request.CreateDeptRequest;
@@ -36,8 +36,8 @@ public class DeptServiceImpl implements DeptService {
 	public CreateDeptResponse create(CreateDeptRequest createDeptRequest) {
 
 		Long parentId = createDeptRequest.parentId();
-		int level = 0;
-		String path = StringPool.SLASH;
+		int deptLevel = 0;
+		String deptPath = StringPool.SLASH;
 		Integer sortOrder = createDeptRequest.sortOrder();
 
 		if (ObjectUtil.equals(parentId, DeptConstant.ROOT_DEPT_ID)) {
@@ -51,11 +51,11 @@ public class DeptServiceImpl implements DeptService {
 			ErrorCode.DEPT_PARENT_DISABLED.isTrue(StatusEnum.DISABLED == parentDept.getStatus());
 
 			// 计算当前部门层级，并校验是否超出最大深度限制
-			level = parentDept.getLevel() + 1;
-			ErrorCode.DEPT_EXCEEDS_DEPTH.isTrue(level >= DeptConstant.MAX_DEPT_DEPTH);
+			deptLevel = parentDept.getDeptLevel() + 1;
+			ErrorCode.DEPT_EXCEEDS_DEPTH.isTrue(deptLevel >= DeptConstant.MAX_DEPT_DEPTH);
 
 			// 拼接当前部门的路径（格式：/1/2/）
-			path = parentDept.getPath() + parentDept.getId() + StringPool.SLASH;
+			deptPath = parentDept.getDeptPath() + parentDept.getDeptId() + StringPool.SLASH;
 
 			// 同级部门同名校验
 			boolean nameDuplicate = deptRepository.isNameDuplicate(parentId, createDeptRequest.deptName());
@@ -72,17 +72,17 @@ public class DeptServiceImpl implements DeptService {
 			}
 		}
 
-		DeptDO deptDO = deptConvert.toDeptDO(createDeptRequest, level, path, sortOrder);
+		DeptDO deptDO = deptConvert.toDeptDO(createDeptRequest, deptLevel, deptPath, sortOrder);
 		deptRepository.save(deptDO);
 
-		return CreateDeptResponse.of(deptDO.getId());
+		return CreateDeptResponse.of(deptDO.getDeptId());
 	}
 
 	@Override
 	public void update(UpdateDeptRequest updateDeptRequest) {
 
 		// 校验当前待修改部门是否存在
-		DeptDO currentDeptDO = deptRepository.getById(updateDeptRequest.id());
+		DeptDO currentDeptDO = deptRepository.getById(updateDeptRequest.deptId());
 		ErrorCode.DEPT_NOT_FOUND.isNull(currentDeptDO);
 
 		// 根部门禁止修改
@@ -93,10 +93,10 @@ public class DeptServiceImpl implements DeptService {
 		Long targetParentId = updateDeptRequest.parentId();
 		ErrorCode.DEPT_ROOT_EXISTS.isTrue(ObjectUtil.equals(targetParentId, DeptConstant.ROOT_DEPT_ID));
 
-		Long currentDeptId = currentDeptDO.getId();
+		Long currentDeptId = currentDeptDO.getDeptId();
 		String currentDeptName = currentDeptDO.getDeptName();
-		Integer currentLevel = currentDeptDO.getLevel();
-		String currentPath = currentDeptDO.getPath();
+		Integer currentLevel = currentDeptDO.getDeptLevel();
+		String currentPath = currentDeptDO.getDeptPath();
 
 		// 判断是否变更了父部门
 		boolean isParentIdChanged = !ObjectUtil.equals(currentParentId, targetParentId);
@@ -114,21 +114,21 @@ public class DeptServiceImpl implements DeptService {
 			// 目标父部门是否已禁用
 			ErrorCode.DEPT_PARENT_DISABLED.isTrue(StatusEnum.DISABLED == targetDept.getStatus());
 			// 目标父部门不能是当前部门的子孙部门（避免环形依赖）
-			String currentDeptPathPrefix = currentDeptDO.getPath() + currentDeptId + StringPool.SLASH;
-			ErrorCode.DEPT_PARENT_IS_CHILD.isTrue(targetDept.getPath().startsWith(currentDeptPathPrefix));
+			String currentDeptPathPrefix = currentDeptDO.getDeptPath() + currentDeptId + StringPool.SLASH;
+			ErrorCode.DEPT_PARENT_IS_CHILD.isTrue(targetDept.getDeptPath().startsWith(currentDeptPathPrefix));
 
 			// 计算当前部门的新层级与新路径
-			currentLevel = targetDept.getLevel() + 1;
-			currentPath = targetDept.getPath() + targetDept.getId() + StringPool.SLASH;
+			currentLevel = targetDept.getDeptLevel() + 1;
+			currentPath = targetDept.getDeptPath() + targetDept.getDeptId() + StringPool.SLASH;
 
 			// 校验当前部门层级是否超出最大深度限制
 			ErrorCode.DEPT_EXCEEDS_DEPTH.isTrue(currentLevel >= DeptConstant.MAX_DEPT_DEPTH);
 //			}
 
 			// 级联更新所有子孙部门的层级(level)和路径(path)
-			String currentPathPrefix = currentDeptDO.getPath() + currentDeptDO.getId() + StringPool.SLASH;
-			String targetPathPrefix = currentPath + currentDeptDO.getId() + StringPool.SLASH;
-			int levelOffset = currentLevel - currentDeptDO.getLevel();
+			String currentPathPrefix = currentDeptDO.getDeptPath() + currentDeptDO.getDeptId() + StringPool.SLASH;
+			String targetPathPrefix = currentPath + currentDeptDO.getDeptId() + StringPool.SLASH;
+			int levelOffset = currentLevel - currentDeptDO.getDeptLevel();
 			// 查找并替换所有子孙部门的 path 与 level
 			deptRepository.updateChildrenPathAndLevel(currentPathPrefix, targetPathPrefix, levelOffset);
 		}

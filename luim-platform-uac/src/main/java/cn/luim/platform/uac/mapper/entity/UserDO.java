@@ -10,11 +10,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName(value = "t_user", autoResultMap = true)
+@TableName(value = "uac_user", autoResultMap = true)
 public class UserDO {
 
-	@TableId
-	private Long id;
-	private String userId;
-	private String chineseName;
+	@TableId("id")
+	private Long userId;
+	private String realName;
+	private String email;
 }

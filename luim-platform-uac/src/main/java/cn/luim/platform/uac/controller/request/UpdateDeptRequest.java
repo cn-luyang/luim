@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 /**
  * 创建部门请求参数
  *
- * @param id        部门ID
+ * @param deptId    部门ID
  * @param parentId  父部门ID
  * @param deptName  部门名称
  * @param sortOrder 排序序号
@@ -15,13 +15,13 @@ import jakarta.validation.constraints.NotNull;
  */
 public record UpdateDeptRequest(
 
-	@NotNull(message = "部门ID为空")
-	Long id,
+	@NotNull
+	Long deptId,
 
-	@NotNull(message = "父部门ID为空")
+	@NotNull
 	Long parentId,
 
-	@NotBlank(message = "部门名称为空")
+	@NotBlank
 	String deptName,
 
 	Integer sortOrder,

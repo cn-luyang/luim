@@ -41,7 +41,7 @@ public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
 		return this.lambdaQuery()
 			.eq(DeptDO::getParentId, parentId)
 			.eq(DeptDO::getDeptName, deptName)
-			.ne(DeptDO::getId, excludeDeptId)
+			.ne(DeptDO::getDeptId, excludeDeptId)
 			.exists();
 	}
 

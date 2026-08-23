@@ -13,10 +13,10 @@ import jakarta.validation.constraints.NotNull;
  */
 public record CreateDeptRequest(
 
-	@NotBlank(message = "部门名称为空")
+	@NotBlank
 	String deptName,
 
-	@NotNull(message = "父部门ID为空")
+	@NotNull
 	Long parentId,
 
 	Integer sortOrder
