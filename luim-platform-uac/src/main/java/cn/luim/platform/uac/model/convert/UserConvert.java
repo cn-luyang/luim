@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserConvert {
 
-	UserDO toUserDO(CreateUserRequest createUserRequest);
+	UserDO toUserDO(Long userId, CreateUserRequest createUserRequest);
 
 	UserDetailDTO buildUserDetailDTO(UserDO userDO);
 

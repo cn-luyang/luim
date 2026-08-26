@@ -2,6 +2,7 @@ package cn.luim.platform.uac.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
+import cn.luim.boot.starter.base.utils.id.IdUtil;
 import cn.luim.platform.uac.common.enums.ErrorCode;
 import cn.luim.platform.uac.controller.request.CreateUserRequest;
 import cn.luim.platform.uac.controller.response.CreateUserResponse;
@@ -37,7 +38,8 @@ public class UserServiceImpl implements UserService {
 		boolean emailDuplicate = userRepository.isEmailDuplicate(createUserRequest.getEmail());
 		ErrorCode.USER_EMAIL_EXISTS.isTrue(emailDuplicate);
 
-		UserDO userDO = userConvert.toUserDO(createUserRequest);
+		Long userId = IdUtil.getSnowflakeNextId();
+		UserDO userDO = userConvert.toUserDO(userId, createUserRequest);
 		userRepository.save(userDO);
 
 		boolean isEmployee = createUserRequest.getUserType().isEmployee();

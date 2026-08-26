@@ -6,6 +6,9 @@ import io.github.robsonkades.uuidv7.UUIDv7;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.Assert;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * ID生成器工具类
  *
@@ -13,6 +16,35 @@ import org.springframework.util.Assert;
  */
 @UtilityClass
 public class IdUtil {
+
+	/**
+	 * 单例对象缓存池 (Key -> Snowflake)
+	 */
+	private static final Map<String, Snowflake> SNOWFLAKE_POOL = new ConcurrentHashMap<>();
+
+	/**
+	 * 默认 Snowflake 缓存键
+	 */
+	private static final String DEFAULT_SNOWFLAKE_KEY = "DEFAULT";
+
+	/**
+	 * 获取默认参数的 Snowflake 全局单例
+	 */
+	public static Snowflake getSnowflake() {
+		return SNOWFLAKE_POOL.computeIfAbsent(DEFAULT_SNOWFLAKE_KEY, k -> new Snowflake());
+	}
+
+	/**
+	 * 根据指定参数获取或创建 Snowflake 单例 (相同参数复用同一实例)
+	 *
+	 * @param workerId     工作机器 ID
+	 * @param dataCenterId 数据中心 ID
+	 * @return Snowflake 单例
+	 */
+	public static Snowflake getSnowflake(long workerId, long dataCenterId) {
+		String key = workerId + StringPool.COLON + dataCenterId;
+		return SNOWFLAKE_POOL.computeIfAbsent(key, k -> new Snowflake(workerId, dataCenterId));
+	}
 
 	/**
 	 * 生成 UUIDv7 字符串
@@ -104,5 +136,37 @@ public class IdUtil {
 		}
 
 		return id;
+	}
+
+	/**
+	 * 获取下一个 Snowflake ID (long 型)
+	 *
+	 * @return 64 位 long 型 ID
+	 */
+	public static long getSnowflakeNextId() {
+		return getSnowflake().nextId();
+	}
+
+	/**
+	 * 获取下一个 Snowflake ID (字符串形式)
+	 *
+	 * @return 字符串形式 ID
+	 */
+	public static String getSnowflakeNextIdStr() {
+		return getSnowflake().nextIdStr();
+	}
+
+	/**
+	 * 获取指定节点的下一个 Snowflake ID (64 位整型)
+	 */
+	public static long getSnowflakeNextId(long workerId, long dataCenterId) {
+		return getSnowflake(workerId, dataCenterId).nextId();
+	}
+
+	/**
+	 * 获取指定节点的下一个 Snowflake ID (字符串形式)
+	 */
+	public static String getSnowflakeNextIdStr(long workerId, long dataCenterId) {
+		return getSnowflake(workerId, dataCenterId).nextIdStr();
 	}
 }

@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * 创建用户请求参数
  *
@@ -43,5 +45,16 @@ public class CreateUserRequest {
 
 		@NotNull
 		private EmployeeType employeeType;
+
+		private List<EmployeeDeptInfo> employeeDeptInfos;
+	}
+
+	@Getter
+	@Setter
+	public static class EmployeeDeptInfo {
+		@NotBlank
+		private String deptId;
+
+		private Boolean mainFlag;
 	}
 }
