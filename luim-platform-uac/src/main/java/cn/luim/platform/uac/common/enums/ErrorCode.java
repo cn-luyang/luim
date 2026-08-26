@@ -5,6 +5,11 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * 错误码枚举类
+ *
+ * @author yang.lu
+ */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ErrorCode implements ExceptionAssert<String> {
