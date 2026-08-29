@@ -58,7 +58,7 @@ public class DeptServiceImpl implements DeptService {
 			deptPath = parentDept.getDeptPath() + parentDept.getDeptId() + StringPool.SLASH;
 
 			// 同级部门同名校验
-			boolean nameDuplicate = deptRepository.isNameDuplicate(parentId, createDeptRequest.deptName());
+			boolean nameDuplicate = deptRepository.isDeptNameExist(parentId, createDeptRequest.deptName());
 			ErrorCode.DEPT_NAME_DUPLICATE.isTrue(nameDuplicate);
 
 			// 处理排序号(sortOrder)更新逻辑
@@ -135,7 +135,7 @@ public class DeptServiceImpl implements DeptService {
 
 		// 校验部门名称是否重复（变更了父部门 或 修改了部门名称 时触发）
 		if (isParentIdChanged || !StringUtil.equals(currentDeptName, updateDeptRequest.deptName())) {
-			boolean nameDuplicate = deptRepository.isNameDuplicate(updateDeptRequest.deptName(), targetParentId, currentDeptId);
+			boolean nameDuplicate = deptRepository.isDeptNameExist(updateDeptRequest.deptName(), targetParentId, currentDeptId);
 			ErrorCode.DEPT_NAME_DUPLICATE.isTrue(nameDuplicate);
 		}
 
@@ -159,5 +159,10 @@ public class DeptServiceImpl implements DeptService {
 
 		DeptDO deptDO = deptConvert.toDeptDO(updateDeptRequest, currentLevel, currentPath, sortOrder);
 		deptRepository.updateById(deptDO);
+	}
+
+	@Override
+	public boolean checkDeptExist(Long deptId) {
+		return deptRepository.isDeptIdExist(deptId);
 	}
 }

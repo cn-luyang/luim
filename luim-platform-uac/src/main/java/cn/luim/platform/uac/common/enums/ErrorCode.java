@@ -17,6 +17,10 @@ public enum ErrorCode implements ExceptionAssert<String> {
 	// 用户相关
 	USER_EMAIL_EXISTS("UAC:USER:001", "邮箱号已存在"),
 
+	// 员工相关
+	EMPLOYEE_NO_EXISTS("UAC:EMPLOYEE:001", "工号已存在"),
+	EMPLOYEE_WORK_EMAIL_EXISTS("UAC:EMPLOYEE:001", "工作邮箱已存在"),
+
 	// 部门相关
 	DEPT_ROOT_EXISTS("UAC:DEPT:001", "根节点已存在"),
 	DEPT_ROOT_NOT_MODIFY("UAC:DEPT:001", "根节禁止修改"),

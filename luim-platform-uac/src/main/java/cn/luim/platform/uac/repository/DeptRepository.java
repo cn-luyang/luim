@@ -6,6 +6,7 @@ import cn.luim.platform.uac.mapper.entity.DeptDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 /**
  * 部门数据仓储
@@ -22,7 +23,7 @@ public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
 	 * @param parentId 父部门 ID
 	 * @param deptName 部门名称
 	 */
-	public boolean isNameDuplicate(Long parentId, String deptName) {
+	public boolean isDeptNameExist(Long parentId, String deptName) {
 		return this.lambdaQuery()
 			.eq(DeptDO::getParentId, parentId)
 			.eq(DeptDO::getDeptName, deptName)
@@ -37,7 +38,7 @@ public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
 	 * @param excludeDeptId 需要排除的部门 ID（通常为当前修改的部门 ID）
 	 * @return 是否存在重复名称的部门
 	 */
-	public boolean isNameDuplicate(String deptName, Long parentId, Long excludeDeptId) {
+	public boolean isDeptNameExist(String deptName, Long parentId, Long excludeDeptId) {
 		return this.lambdaQuery()
 			.eq(DeptDO::getParentId, parentId)
 			.eq(DeptDO::getDeptName, deptName)
@@ -96,6 +97,13 @@ public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
 	public boolean rootDeptExists() {
 		return this.lambdaQuery()
 			.eq(DeptDO::getParentId, DeptConstant.ROOT_DEPT_ID)
+			.exists();
+	}
+
+	public boolean isDeptIdExist(Long deptId) {
+		Assert.notNull(deptId, "缺失查询条件");
+		return this.lambdaQuery()
+			.eq(DeptDO::getDeptId, deptId)
 			.exists();
 	}
 }

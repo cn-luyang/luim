@@ -35,6 +35,13 @@ public class IdUtil {
 	}
 
 	/**
+	 * 仅指定工作机器 ID (数据中心 ID 使用 Snowflake 默认值)
+	 */
+	public static Snowflake getSnowflake(long workerId) {
+		return getSnowflake(workerId, Snowflake.DEFAULT_DATACENTER_ID);
+	}
+
+	/**
 	 * 根据指定参数获取或创建 Snowflake 单例 (相同参数复用同一实例)
 	 *
 	 * @param workerId     工作机器 ID

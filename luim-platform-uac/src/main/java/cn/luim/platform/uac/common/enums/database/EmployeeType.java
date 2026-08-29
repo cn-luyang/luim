@@ -1,6 +1,7 @@
-package cn.luim.platform.uac.common.enums;
+package cn.luim.platform.uac.common.enums.database;
 
 import cn.luim.boot.starter.base.enums.IBaseEnum;
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public enum EmployeeType implements IBaseEnum<Integer> {
 	OUTSOURCED(3, "外协人员"),
 	;
 
+	@EnumValue
 	private final Integer code;
 	private final String message;
 }

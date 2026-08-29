@@ -20,7 +20,7 @@ public class UserRepository extends ServiceImpl<UserMapper, UserDO> {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
-	public boolean isEmailDuplicate(String email) {
+	public boolean isEmailExist(String email) {
 		return this.lambdaQuery()
 			.eq(UserDO::getEmail, email)
 			.exists();

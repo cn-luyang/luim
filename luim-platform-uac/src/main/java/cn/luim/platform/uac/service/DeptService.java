@@ -14,4 +14,6 @@ public interface DeptService {
 	CreateDeptResponse create(CreateDeptRequest createDeptRequest);
 
 	void update(UpdateDeptRequest updateDeptRequest);
+
+	boolean checkDeptExist(Long deptId);
 }

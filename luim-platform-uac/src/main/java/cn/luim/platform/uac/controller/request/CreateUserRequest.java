@@ -1,15 +1,11 @@
 package cn.luim.platform.uac.controller.request;
 
-import cn.luim.platform.uac.common.enums.EmployeeType;
-import cn.luim.platform.uac.common.enums.UserType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 /**
  * 创建用户请求参数
@@ -28,7 +24,7 @@ public class CreateUserRequest {
 	private String email;
 
 	@NotNull
-	private UserType userType;
+	private Integer userType;
 
 	@Valid
 	private EmployeeInfo employeeInfo;
@@ -36,6 +32,10 @@ public class CreateUserRequest {
 	@Getter
 	@Setter
 	public static class EmployeeInfo {
+
+		@NotNull
+		private Long deptId;
+
 		@NotBlank
 		private String employeeNo;
 
@@ -44,17 +44,6 @@ public class CreateUserRequest {
 		private String workEmail;
 
 		@NotNull
-		private EmployeeType employeeType;
-
-		private List<EmployeeDeptInfo> employeeDeptInfos;
-	}
-
-	@Getter
-	@Setter
-	public static class EmployeeDeptInfo {
-		@NotBlank
-		private String deptId;
-
-		private Boolean mainFlag;
+		private Integer employeeType;
 	}
 }

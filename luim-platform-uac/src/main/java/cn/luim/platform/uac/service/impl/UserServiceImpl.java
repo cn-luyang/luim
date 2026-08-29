@@ -2,15 +2,17 @@ package cn.luim.platform.uac.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
 import cn.luim.boot.starter.base.utils.StringUtil;
-import cn.luim.boot.starter.base.utils.id.IdUtil;
 import cn.luim.platform.uac.common.enums.ErrorCode;
+import cn.luim.platform.uac.common.enums.database.UserType;
 import cn.luim.platform.uac.controller.request.CreateUserRequest;
 import cn.luim.platform.uac.controller.response.CreateUserResponse;
 import cn.luim.platform.uac.mapper.entity.UserDO;
 import cn.luim.platform.uac.model.convert.UserConvert;
 import cn.luim.platform.uac.model.dto.UserDetailDTO;
 import cn.luim.platform.uac.repository.UserRepository;
+import cn.luim.platform.uac.service.EmployeeService;
 import cn.luim.platform.uac.service.UserService;
+import cn.luim.platform.uac.service.command.CreateEmployeeCommand;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,20 +33,25 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 	private final UserConvert userConvert;
 
+	private final EmployeeService employeeService;
+
 	@Transactional
 	@Override
 	public CreateUserResponse create(CreateUserRequest createUserRequest) {
 
-		boolean emailDuplicate = userRepository.isEmailDuplicate(createUserRequest.getEmail());
-		ErrorCode.USER_EMAIL_EXISTS.isTrue(emailDuplicate);
+		// 校验邮箱是否存在
+		boolean emailExist = userRepository.isEmailExist(createUserRequest.getEmail());
+		ErrorCode.USER_EMAIL_EXISTS.isTrue(emailExist);
 
-		Long userId = IdUtil.getSnowflakeNextId();
-		UserDO userDO = userConvert.toUserDO(userId, createUserRequest);
+		UserDO userDO = userConvert.toUserDO(createUserRequest);
 		userRepository.save(userDO);
 
-		boolean isEmployee = createUserRequest.getUserType().isEmployee();
-		if (isEmployee) {
-
+		if (UserType.isEmployee(createUserRequest.getUserType())) {
+			CreateEmployeeCommand command = userConvert.toCreateEmployeeCommand(
+				userDO.getUserId(),
+				createUserRequest.getEmployeeInfo()
+			);
+			employeeService.create(command);
 		}
 
 		return CreateUserResponse.of(userDO.getUserId());
