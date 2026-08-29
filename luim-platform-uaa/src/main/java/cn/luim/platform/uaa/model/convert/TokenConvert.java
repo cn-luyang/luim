@@ -1,9 +1,9 @@
 package cn.luim.platform.uaa.model.convert;
 
 import cn.luim.platform.uaa.common.utils.TokenUtil;
+import cn.luim.platform.uaa.mapper.entity.TokenDO;
 import cn.luim.platform.uaa.model.command.CreateUserTokenCommand;
 import cn.luim.platform.uaa.model.dto.CreateUserTokenDTO;
-import cn.luim.platform.uaa.model.entity.TokenDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

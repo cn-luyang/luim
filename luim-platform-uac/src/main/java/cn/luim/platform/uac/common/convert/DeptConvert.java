@@ -1,4 +1,4 @@
-package cn.luim.platform.uac.model.convert;
+package cn.luim.platform.uac.common.convert;
 
 import cn.luim.platform.uac.controller.request.CreateDeptRequest;
 import cn.luim.platform.uac.controller.request.UpdateDeptRequest;

@@ -1,14 +1,14 @@
 package cn.luim.platform.uaa.repository;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
-import cn.luim.boot.starter.base.utils.StringUtil;
 import cn.luim.platform.uaa.mapper.ClientMapper;
-import cn.luim.platform.uaa.model.entity.ClientDO;
+import cn.luim.platform.uaa.mapper.entity.ClientDO;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 /**
  * @author yang.lu
@@ -19,17 +19,15 @@ public class ClientRepository extends ServiceImpl<ClientMapper, ClientDO> {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClientRepository.class);
 
-	public boolean isClientNameTaken(String clientName) {
-		if (StringUtil.isBlank(clientName)) {
-			return false;
-		}
-
+	public boolean isClientNameExist(String clientName) {
+		Assert.hasText(clientName, "缺失查询参数");
 		return this.lambdaQuery()
 			.eq(ClientDO::getClientName, clientName)
 			.exists();
 	}
 
 	public ClientDO findByClientId(String clientId) {
+		Assert.hasText(clientId, "缺失查询参数");
 		return this.lambdaQuery()
 			.eq(ClientDO::getClientId, clientId)
 			.oneOpt()

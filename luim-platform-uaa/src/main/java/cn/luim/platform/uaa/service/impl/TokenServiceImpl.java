@@ -1,10 +1,10 @@
 package cn.luim.platform.uaa.service.impl;
 
 import cn.luim.boot.starter.base.utils.ObjectUtil;
+import cn.luim.platform.uaa.mapper.entity.TokenDO;
 import cn.luim.platform.uaa.model.command.CreateUserTokenCommand;
 import cn.luim.platform.uaa.model.convert.TokenConvert;
 import cn.luim.platform.uaa.model.dto.CreateUserTokenDTO;
-import cn.luim.platform.uaa.model.entity.TokenDO;
 import cn.luim.platform.uaa.repository.TokenRepository;
 import cn.luim.platform.uaa.service.ClientService;
 import cn.luim.platform.uaa.service.TokenService;

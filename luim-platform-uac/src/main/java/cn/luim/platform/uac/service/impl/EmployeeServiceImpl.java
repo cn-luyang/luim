@@ -1,8 +1,8 @@
 package cn.luim.platform.uac.service.impl;
 
+import cn.luim.platform.uac.common.convert.EmployeeConvert;
 import cn.luim.platform.uac.common.enums.ErrorCode;
 import cn.luim.platform.uac.mapper.entity.EmployeeDO;
-import cn.luim.platform.uac.model.convert.EmployeeConvert;
 import cn.luim.platform.uac.repository.EmployeeRepository;
 import cn.luim.platform.uac.service.DeptService;
 import cn.luim.platform.uac.service.EmployeeService;

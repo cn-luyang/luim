@@ -1,4 +1,4 @@
-package cn.luim.platform.uaa.model.command;
+package cn.luim.platform.uaa.controller.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class ClientCreateCommand {
+public class ClientCreateRequest {
 
 	private String clientName;
 	private List<String> redirectUris;

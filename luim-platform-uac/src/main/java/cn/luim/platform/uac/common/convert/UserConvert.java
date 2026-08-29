@@ -1,4 +1,4 @@
-package cn.luim.platform.uac.model.convert;
+package cn.luim.platform.uac.common.convert;
 
 import cn.luim.boot.starter.base.enums.IBaseEnum;
 import cn.luim.boot.starter.base.utils.id.IdUtil;
@@ -6,8 +6,8 @@ import cn.luim.platform.api.uac.model.response.GetUserInfoResponse;
 import cn.luim.platform.uac.common.enums.database.UserType;
 import cn.luim.platform.uac.controller.request.CreateUserRequest;
 import cn.luim.platform.uac.mapper.entity.UserDO;
-import cn.luim.platform.uac.model.dto.UserDetailDTO;
 import cn.luim.platform.uac.service.command.CreateEmployeeCommand;
+import cn.luim.platform.uac.service.dto.UserDetailDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
