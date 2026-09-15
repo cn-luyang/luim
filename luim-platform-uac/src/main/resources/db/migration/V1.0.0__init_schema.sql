@@ -9,6 +9,29 @@ CREATE TABLE `uac_user`
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
 
+CREATE TABLE `uac_account`
+(
+    `id`           BIGINT UNSIGNED NOT NULL COMMENT '主键ID',
+    `user_id`      BIGINT UNSIGNED NOT NULL COMMENT '用户ID',
+    `account`      VARCHAR(128) NOT NULL COMMENT '登录账号',
+    `account_type` TINYINT(1)  NOT NULL COMMENT '账号类型：1-个人邮箱 2-工作邮箱 3-手机号 4-工号',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_identifier_type` (`account`, `account_type`),
+    KEY            `idx_user_id` (`user_id`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_0900_ai_ci COMMENT='登录账号表';
+
+CREATE TABLE `uac_password`
+(
+    `id`            BIGINT UNSIGNED NOT NULL COMMENT '主键ID',
+    `user_id`       BIGINT UNSIGNED NOT NULL COMMENT '用户ID',
+    `password_hash` VARCHAR(255) NOT NULL COMMENT '密码Hash值',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_0900_ai_ci COMMENT='密码表';
+
 CREATE TABLE `uac_employee`
 (
     `id`            BIGINT UNSIGNED NOT NULL COMMENT '主键ID',
@@ -22,7 +45,7 @@ CREATE TABLE `uac_employee`
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_0900_ai_ci COMMENT='员工表';
 
-CREATE TABLE `uac_department`
+CREATE TABLE `uac_dept`
 (
     `id`         BIGINT UNSIGNED  NOT NULL COMMENT '主键ID',
     `parent_id`  BIGINT UNSIGNED  NOT NULL COMMENT '父部门ID',

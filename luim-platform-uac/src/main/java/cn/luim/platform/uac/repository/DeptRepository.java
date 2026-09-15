@@ -1,5 +1,7 @@
 package cn.luim.platform.uac.repository;
 
+import cn.luim.boot.starter.base.utils.ObjectUtil;
+import cn.luim.boot.starter.redisson.helper.RedissonHelper;
 import cn.luim.platform.uac.common.constant.DeptConstant;
 import cn.luim.platform.uac.mapper.DeptMapper;
 import cn.luim.platform.uac.mapper.entity.DeptDO;
@@ -7,6 +9,9 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
+
+import java.io.Serializable;
+import java.time.Duration;
 
 /**
  * 部门数据仓储
@@ -16,6 +21,37 @@ import org.springframework.util.Assert;
 @Repository
 @RequiredArgsConstructor
 public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
+
+	private final RedissonHelper redissonHelper;
+
+	@Override
+	public boolean save(DeptDO entity) {
+		return super.save(entity);
+	}
+
+	@Override
+	public DeptDO getById(Serializable id) {
+		if (ObjectUtil.isNull(id)) {
+			return null;
+		}
+
+		// 查询缓存
+		String cacheKey = DeptConstant.CACHE_DEPT_INFO + id;
+		DeptDO cachedDept = redissonHelper.getString(cacheKey);
+		if (null != cachedDept) {
+			return cachedDept;
+		}
+
+		// 查询数据库
+		DeptDO dbDept = super.getById(id);
+		if (null == dbDept) {
+			return null;
+		}
+
+		// 添加缓存30分钟有效期
+		redissonHelper.setString(cacheKey, dbDept, Duration.ofSeconds(1800));
+		return dbDept;
+	}
 
 	/**
 	 * 校验同级下部门名称是否重复
@@ -100,10 +136,14 @@ public class DeptRepository extends ServiceImpl<DeptMapper, DeptDO> {
 			.exists();
 	}
 
+	/**
+	 * 部门 ID 是否存在
+	 *
+	 * @param deptId 部门ID
+	 * @return true存在 false不存在
+	 */
 	public boolean isDeptIdExist(Long deptId) {
 		Assert.notNull(deptId, "缺失查询条件");
-		return this.lambdaQuery()
-			.eq(DeptDO::getDeptId, deptId)
-			.exists();
+		return getById(deptId) != null;
 	}
 }

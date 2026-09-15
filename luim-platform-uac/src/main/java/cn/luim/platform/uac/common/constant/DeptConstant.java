@@ -16,4 +16,6 @@ public final class DeptConstant {
 	 * 部门最大层级深度限制
 	 */
 	public static final int MAX_DEPT_DEPTH = 10;
+
+	public static final String CACHE_DEPT_INFO = "uac:dept:info:";
 }

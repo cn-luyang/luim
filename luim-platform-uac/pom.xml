@@ -30,6 +30,10 @@
             <artifactId>luim-boot-starter-security</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.luim</groupId>
+            <artifactId>luim-boot-starter-redisson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
