@@ -1,12 +1,12 @@
 spring:
   application:
-    name: luim-cloud-gateway
+    name: luim-gateway-ingress
   cloud:
     nacos:
       discovery:
         server-addr: ${NACOS_HOST}
         username: ${NACOS_USERNAME}
-        password: ${NACOS_USERNAME}
+        password: ${NACOS_PASSWORD}
     gateway:
       server:
         webflux:
@@ -16,7 +16,7 @@ spring:
               lower-case-service-id: true
 logging:
   level:
-    cn.luim.cloud.gateway: DEBUG
+    cn.luim.gateway.ingress: DEBUG
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
     com.alibaba.nacos: INFO

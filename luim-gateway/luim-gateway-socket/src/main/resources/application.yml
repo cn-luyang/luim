@@ -1,0 +1,14 @@
+server:
+  port: 8880
+spring:
+  application:
+    name: luim-gateway-socket
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST}
+        username: ${NACOS_USERNAME}
+        password: ${NACOS_PASSWORD}
+logging:
+  level:
+    cn.luim.gateway.socket: DEBUG

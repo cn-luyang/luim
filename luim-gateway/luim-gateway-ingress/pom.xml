@@ -7,10 +7,10 @@
 
     <parent>
         <groupId>cn.luim</groupId>
-        <artifactId>luim</artifactId>
+        <artifactId>luim-gateway</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>luim-cloud-gateway</artifactId>
+    <artifactId>luim-gateway-ingress</artifactId>
 
     <dependencies>
         <dependency>
