@@ -29,10 +29,9 @@
     <modules>
         <module>luim-bom</module>
         <module>luim-boot</module>
+        <module>luim-support</module>
         <module>luim-gateway</module>
-        <module>luim-platform-api-uac</module>
-        <module>luim-platform-uaa</module>
-        <module>luim-platform-uac</module>
+        <module>luim-platform</module>
     </modules>
 
     <dependencyManagement>
