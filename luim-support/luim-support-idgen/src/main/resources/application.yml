@@ -1,0 +1,8 @@
+server:
+  port: 8883
+spring:
+  application:
+    name: luim-support-id
+logging:
+  level:
+    cn.luim.support.id: DEBUG

@@ -21,3 +21,4 @@ public class AccountAuthRequest implements Serializable {
 	String credential;
 	AccountType accountType;
 }
+
